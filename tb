@@ -1,0 +1,19 @@
+`timescale 1ns / 1ps
+module tb( );
+ reg [1:0] A,B;
+ wire Gt, Lt, Eq;
+ 
+ //instanciate the module
+ dut Z(.A(A), .B(B), .Gt(Gt), .Lt(Lt), .Eq(Eq));
+ 
+ initial begin
+ A=2'b00; 
+ B=2'b00;
+  $monitor("%0t A=%0b B=%0b | Gt=%0b Lt=%0b Eq=%0b", $time, A, B, Gt, Lt, Eq); 
+  repeat (16) begin
+   #5;
+   {A,B}={A,B} + 1;
+  end
+  $finish;
+ end
+endmodule
